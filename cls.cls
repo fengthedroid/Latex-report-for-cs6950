@@ -35,8 +35,7 @@
 %\usepackage[left=3.8cm, right=2.5cm, top=3cm, bottom=3cm]{geometry}
 %
 %%---------------------define command in the title page--------------------
-\newcommand{\submittext}{A (Thesis, Dissertation, or Report) submitted to the
-School of Graduate Studies in partial fulfillment of the requirements for the degree of}
+\newcommand{\submittext}{A term project report for the course CMSC6950 Computer Based Research Tools and Applications}
 \newcommand{\thesisnote}{by}
 \newcommand{\degree}{}
 \newcommand{\faculty}{}

@@ -1,0 +1,121 @@
+\documentclass[12pt]{cls}
+%set MUN Thesis Guidelines margins
+\usepackage[left=3.8cm, right=2.5cm, top=3cm, bottom=3cm]{geometry}
+
+%lists package and bullet formats
+\usepackage{paralist}
+\usepackage{bbding}
+%enhanced graphics support
+\usepackage{graphicx}
+%formatting for websites and e-mail addresses
+\usepackage{url}
+%pageheaders and footers in LaTeX2e
+\usepackage{fancyhdr}
+%footnote options
+\usepackage{footmisc}
+%algorithms
+\usepackage{algorithmic}
+%source code printer
+\usepackage{listings}
+%read/write verbatim TeX code
+\usepackage{fancyvrb}
+
+
+
+%THIS IS WHERE YOU ENTER THE TITLE OF YOUR THESIS
+\title{Class explorer for semantic web datastore}
+
+%THIS IS WHERE YOU ENTER YOUR NAME
+\author{Feng Wu}
+
+%THIS IS WHERE YOU ENTER THE NAME OF YOUR DEGREE
+\deg{Master of computer science}
+
+%THIS IS WHERE YOU ENTER THE NAME OF YOUR DEPARTMENT, SCHOOL, or FACULTY
+\fac{Department of Computer Science}
+
+%THIS IS WHERE YOU ENTER THE DATE YOU SUBMITTED YOUR THESIS OR DISSERTATION
+\date{June 2013}
+
+%THIS IS WHERE YOU ENTER THE YEAR OF GRADUATION 
+\copyrightyear{2013}
+
+
+%no paragraph indentation
+\setlength\parindent{0pt}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{definition}{Definition}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem{notation}{Notation}[section]
+\begin{document}
+\muntitlepage
+
+%set the hierarchical drilldown to 3
+\setcounter{secnumdepth}{3} \setcounter{tocdepth}{3}
+
+%set pagination to Roman numerals and begin at page i
+\pagenumbering{roman} \setcounter{page}{1}
+
+\doublespacing
+\setlength{\topmargin}{-.5in}
+
+\chapter*{Abstract}
+\addcontentsline{toc}{chapter}{Abstract}
+%enter text for the abstract below
+Text for the abstract.
+
+\chapter*{Acknowledgements}
+\addcontentsline{toc}{chapter}{Acknowledgments} 
+%enter text for the acknowledgements below
+Text for the acknowledgements.
+
+%%-----------Table of Contents------------------
+\renewcommand{\contentsname}{Table of Contents}
+\tableofcontents{}
+\addcontentsline{toc}{chapter}{Table of Contents}
+%%------------List of Tables----------------------
+\listoftables{}
+\addcontentsline{toc}{chapter}{List of Tables}
+%%------------List of Figures----------------------
+\listoffigures{}
+\addcontentsline{toc}{chapter}{List of Figures}
+
+%change single space to double space
+\doublespacing
+%maintain Roman numerals on the previous page
+\clearpage
+%set pagination to Arabic
+\pagenumbering{arabic} 
+
+
+
+%%-----------Chapter start-------------------------------------
+%%-----------Chapter 1------------------------------------------
+\chapter{Referencing and Formatting}
+\setcounter{secnumdepth}{3} \pagenumbering{arabic}
+\setcounter{page}{1} \pagestyle{myheadings}
+\markboth{}{}\markright{} \rhead{\thepage} \setcounter{page}{1}
+\pagestyle{myheadings} \pagenumbering{arabic} \rhead{\thepage}
+\setcounter{page}{1}
+
+This chapter contains sample code for referencing and formatting.
+
+\section{Footnotes, Endnotes, Bibliographic Citations and Cross-References}
+Please see the relevant section below.
+
+\subsection{Footnotes}
+The following command is used for footnotes \textbackslash footnote\{text for the footnote\}.\footnote{text for the footnote}
+
+\subsection{URIs and eMail}
+The \textbackslash url\{\} command is used to properly show an URI or e-mail address:
+
+School of Graduate Studies: \url{www.mun.ca/sgs}\\
+eMail: \url{eTheses@mun.ca}
+
+
+
+%ensure correct pagination for the bibliography in the table of contents
+\cleardoublepage
+
+ 
+\end{document}
