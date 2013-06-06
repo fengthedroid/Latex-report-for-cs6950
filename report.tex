@@ -20,6 +20,8 @@
 %read/write verbatim TeX code
 \usepackage{fancyvrb}
 
+\setlength{\parskip}{16pt plus 1pt minus 1pt}
+
 
 
 %THIS IS WHERE YOU ENTER THE TITLE OF YOUR THESIS
@@ -93,20 +95,19 @@ Text for the abstract.
 \pagestyle{myheadings} \pagenumbering{arabic} \rhead{\thepage}
 \setcounter{page}{1}
 
-This chapter contains sample code for referencing and formatting.
-
 \section{Background}
-Please see the relevant section below.
 
-\subsection{Footnotes}
-The following command is used for footnotes \textbackslash footnote\{text for the footnote\}.\footnote{text for the footnote}
+While the internet has successfully connected a huge amount of unstructured data in a human-orientated fashion, and hence produced structured data in a magnitude we have never seen before, ironically these structured data has been stored in completely separate silos. Numerous methods have been proposed to tear down the silo, both internally and externally, from the perspective of information enterprises. Tools such as middlewares and APIs are build upon existing data to address the issue.
 
-\subsection{URIs and eMail}
-The \textbackslash url\{\} command is used to properly show an URI or e-mail address:
+On the other hand, with more relevant data generating exponentially every day, the state-of-the-art database design model - relational model - has been proven lacking the desired flexibility to adopt new information in many cases. In healthcare for instance, if the schema for patient records is predetermined, it will not be able to record the results for some tests that are invented after the database has been implemented. Entity–attribute–value model can be implemented on top of relational data schema for the extra dynamics, but this approach sacrifices the original functionalities that relational databases provide.
 
-School of Graduate Studies: \url{www.mun.ca/sgs}\\
-eMail: \url{eTheses@mun.ca}
+Rooted from the concept of semantic network, which is one of the knowledge representations in the domain of artificial intelligence, Semantic web solves the above difficulties by taking a fundamental paradigm shift about how the data should be organized.
 
+Comparable to Entity–attribute–value model, semantic web stores data in a triplestore, where data entities are arranged as triples, which take the form of subject-predicate-object.
+
+class
+
+infer
 
 \chapter{Task performed}
 \chapter{Tools}
@@ -119,6 +120,16 @@ eMail: \url{eTheses@mun.ca}
 \chapter{Appendix}
 \section{References}
 \section{A brief summary of the papers}
+
+\subsection{Footnotes}
+The following command is used for footnotes \textbackslash footnote\{text for the footnote\}.\footnote{text for the footnote}
+
+\subsection{URIs and eMail}
+The \textbackslash url\{\} command is used to properly show an URI or e-mail address:
+
+School of Graduate Studies: \url{www.mun.ca/sgs}\\
+eMail: \url{eTheses@mun.ca}
+
 
 %ensure correct pagination for the bibliography in the table of contents
 \cleardoublepage
