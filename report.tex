@@ -56,7 +56,7 @@
 \setcounter{secnumdepth}{3} \setcounter{tocdepth}{3}
 
 %set pagination to Roman numerals and begin at page i
-\pagenumbering{roman} \setcounter{page}{1}
+\pagenumbering{arabic} \setcounter{page}{0}
 
 \doublespacing
 \setlength{\topmargin}{-.5in}
@@ -64,36 +64,28 @@
 \chapter*{Abstract}
 \addcontentsline{toc}{chapter}{Abstract}
 %enter text for the abstract below
-Text for the abstract.
+A huge amount of semantic web formatted data has been published on the internet, but yet to be exploited and utilized. By identifying a discrepancy between existing web search engines and the human cognitive process, we propose a novel information retrieval and visualization approach to cater to what the human brain expected from the search result, with the aid of newly available semantic linked data and ontologies. This approach explores the concept of classes or categories for a given data instance, to target the attributes of the instance that the user is most interested, which in turn may potentially result in higher recall and precision of the search result. The autonomy of a prototype system realizing this approach will be fully examined followingly.
+
+
 
 %%-----------Table of Contents------------------
 \renewcommand{\contentsname}{Table of Contents}
 \tableofcontents{}
 \addcontentsline{toc}{chapter}{Table of Contents}
-%%------------List of Tables----------------------
-\listoftables{}
-\addcontentsline{toc}{chapter}{List of Tables}
-%%------------List of Figures----------------------
-\listoffigures{}
-\addcontentsline{toc}{chapter}{List of Figures}
 
 %change single space to double space
 \doublespacing
 %maintain Roman numerals on the previous page
 \clearpage
-%set pagination to Arabic
-\pagenumbering{arabic} 
-
-
 
 %%-----------Chapter start-------------------------------------
 %%-----------Chapter 1------------------------------------------
 \chapter{Introduction}
-\setcounter{secnumdepth}{3} \pagenumbering{arabic}
-\setcounter{page}{1} \pagestyle{myheadings}
-\markboth{}{}\markright{} \rhead{\thepage} \setcounter{page}{1}
-\pagestyle{myheadings} \pagenumbering{arabic} \rhead{\thepage}
-\setcounter{page}{1}
+\setcounter{secnumdepth}{3} 
+\pagestyle{myheadings}
+\markboth{}{}\markright{} \rhead{\thepage} 
+\pagestyle{myheadings} \rhead{\thepage}
+
 
 \section{Background}
 
@@ -103,19 +95,77 @@ On the other hand, with more relevant data generating exponentially every day, t
 
 Rooted from the concept of semantic network, which is one of the knowledge representations in the domain of artificial intelligence, Semantic web solves the above difficulties by taking a fundamental paradigm shift about how the data should be organized.
 
-Comparable to Entity–attribute–value model, semantic web stores data in a triplestore, where data entities are arranged as triples, which take the form of subject-predicate-object.
+Comparable to Entity–attribute–value model, semantic web stores data in a triplestore, where data entities are arranged as triples, which take the form of subject-predicate-object. However, semantic web data store is built for the purpose of linking data together. The subject, object, and even the predicate is not necessarily defined in the local data set. They can be defined elsewhere in the internet, identified by a unique URI. This is the essence why it is called semantic web: Semantics is expressed by linkages between concepts.
 
-class
+Plus, in contrast to Entity–attribute–value model, where the attribute is defined as relational tables, in triplestore not only the object, but the predicate in a triple can be the subject of other triples as well, which greatly enhanced the expressiveness of such a data model.
 
-infer
+Because predicates can be described elsewhere as subjects, they can form superclass/subclass relationships; they can have constraints such as the set of elements the predicate can attribute to, and the set of elements the predicate can attribute with; and they can be used to define classification rules.
+
+Triplestore can contain triples representing any particular data entities or instances, and they need not to belong to any class at any time during their life-cycles. Yet at times they may be tied to more than one classes. Hence the properties an instance can possess will not be confined by its classification. This characteristic helps prevent information loss during modelling of the instances.
+
+Classes can be defined by having predicates as their properties, so that any data instances sharing those predicates can be catalogued into the corresponding classes. For instance, if there is a triple "Kate hasChild Mary", and a class Parent is defined as "Parent hasPredicate hasChild", then it implies Kate can be classified as Parent.
+
+Such classification can be assigned manually, or more conveniently, by an automatic inference engine. By adopting the form of subject-predicate-object, triples can act as inference rules in the traditional artificial intelligence sense. Since predicates can themselves form a hierarchical relationship, superclass/subclass relationship can therefore be inferred also. For instance if the predicate "hasChild" is a specialization of the predicate "hasOffspring", and a class called Organism is defined as instances having the predicate "hasOffspring", then by inference Kate can be classified as Organism too.
+
+The inferred superclass/subclass hierarchy, or so called ontology, has the inherent strictly defined predicate generalization/specialization relationship. Parsons and Wand (2003) coined the term Property Precedence for this relationship and further developed a precedence algebra to categorize a whole range of different cases that the semantic meaning of data can be derived from such a relationship.
+
+Equipped with such expressibility, semantic web triplestore can mirror the reality more naturally. It is capable to cope with ever-changing information. Furthermore, data reconciliation from heterogeneous sources can be easily achieved by identifying predicate generalization/specialization relationship from different sources.
+
+\section{Motivation}
+
+With all the above mentioned advantages over conventional databases, people around the world began to publish their data in the semantic web triple format. They are also linked with each other so that a single query can traverse through the entire network of data sources.
+
+\begin{figure}[ht!]
+\centering
+\includegraphics[width=\textwidth]{figures/opendata.jpeg}
+\caption{Published open data}
+\label{open data chart}
+\end{figure}
+
+For the first time we have been presented with a huge and interconnected data source with which anybody who has an internet connection can query freely. Nevertheless until today there have not emerged any killer application that can promote the concept of semantic web to a more broad audience. The usage of those data sources is rather limited for either academia or highly specialized application such as some bioinformatics query utilities.
+
+Since semantic web is a more reasonable way to organize information, it should further facilitate information retrieval for our daily use. Tim Berners-Lee (2001) described an automatic personal agent that has the ability to retrieve data with the precision and recall as a human being. This agent is no near to be found until today, but using semantic linked data to optimize precision and recall of search result is an attainable goal.
+
+Existing web search is keywords oriented. The search engine can skim through its indexed database for documents containing user provided keywords, or its synonyms. While according to Andrei Broder (2002), web queries can be categorized into three major classes: Informational, Navigational, and Transactional. Keyword search may not satisfy the different purposed queries with same or similar keywords.
+
+Semantic linked data can satisfy a more broad range of web query purposes, as it may display different facets for the same topic. User could later browse to any particular facet by following the links between data entities.
+
+Interestingly, this faceted approach of representing information is what our brains do during the cognitive process of thinking. When we need to refer to any particular thing, we generally speak of it in terms of the class to which it belongs. But we assign this classification upon the item being referred according to the problem we want to solve at hand. For example, under various circumstances, we might refer to Leonardo da Vinci as the artist, as the Italian or Tuscan painter, as the Renaissance artist, or even as the Italian vegetarian, or the person who was prosecuted under anti-homosexuality laws. When we refer to him by those classes, we are implying the relevant characteristics that Leonardo da Vinci had that share with other instances within the same class.
+
+With available semantic linked data sources, we propose a novel semantic search approach to deliver a faceted information visualization upon a given fact, and a prototype software will be developed as a initial show case.
+
+\section{Related Work}
+
+Some existing applications, such as Google knowledge search or Facebook graph search, only work with data links on the instance level. That is to say they model the dataset as a graph. On a closer examination, both of them use a local data store instead of the whole data store network.
+
+Facebook use an internal data store with API for external accessing. Google acquired Freebase as the basis for the knowledge search, which provides semantic search and RDF functionalities. It is built by importing various semantic data sources. But it does not maintain a well structured class hierarchy, or ontology, above its instance layer.
+
+Till today, the class dimension of semantic linked data is largely untouched by applications. This is not caused by the lack of ontology information available on the internet. DBpedia, the semantic data store mirror for Wikipedia, maintained a shallow, cross-domain ontology. It has been manually created and currently covers 359 classes which form a subsumption hierarchy and are described by 1,775 different properties (Christopher Sahnwaldt, 2012). Some other well populated ontologies are YAGO and UMBEL (Upper Mapping and Binding Exchange Layer), both containing more than thousands of class definitions. Our prototype system will query all the above mentioned ontologies to enrich the query result.
 
 \chapter{Task performed}
 \chapter{Tools}
+
+\section{Git}
+
+\section{Python}
+
+\subsection{SPARQLWrapper}
+
+\subsection{rdflib}
+
+\subsection{other packages}
+
+\section{Regular expression}
+
+\section{Multi-thread}
+
 \chapter{How-to}
 
 \chapter{Summary}
 \section{Lesson learned}
 \section{Future research}
+
+property precedence
 
 \chapter{Appendix}
 \section{References}
@@ -130,6 +180,12 @@ The \textbackslash url\{\} command is used to properly show an URI or e-mail add
 School of Graduate Studies: \url{www.mun.ca/sgs}\\
 eMail: \url{eTheses@mun.ca}
 
+%%------------List of Tables----------------------
+\listoftables{}
+\addcontentsline{toc}{chapter}{List of Tables}
+%%------------List of Figures----------------------
+\listoffigures{}
+\addcontentsline{toc}{chapter}{List of Figures}
 
 %ensure correct pagination for the bibliography in the table of contents
 \cleardoublepage
