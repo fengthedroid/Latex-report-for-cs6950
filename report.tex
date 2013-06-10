@@ -23,16 +23,23 @@
 \usepackage{seqsplit}
 %for figures
 \usepackage{float}
-
-\setlength{\parskip}{16pt plus 1pt minus 1pt}
+%for paragraph distance
+\setlength{\parskip}{15pt plus 1pt minus 1pt}
 
 
 
 %THIS IS WHERE YOU ENTER THE TITLE OF YOUR THESIS
 \title{Class explorer for semantic web datastore}
 
+
+
+
+
+
 %THIS IS WHERE YOU ENTER YOUR NAME
-\author{Feng Wu}
+\author{Feng Wu   201292638}
+
+
 
 %THIS IS WHERE YOU ENTER THE NAME OF YOUR DEGREE
 \deg{Master of computer science}
@@ -68,7 +75,7 @@
 \chapter*{Abstract}
 \addcontentsline{toc}{chapter}{Abstract}
 %enter text for the abstract below
-A huge amount of semantic web formatted data has been published on the internet, but yet to be exploited and utilized. By identifying a discrepancy between existing web search engines and the human cognitive process, we propose a novel information retrieval and visualization approach to cater to what the human brain expected from the search result, with the aid of newly available semantic linked data and ontologies. This approach explores the concept of classes or categories for a given data instance, to target the attributes of the instance that the user is most interested, which in turn may potentially result in higher recall and precision of the search result. The autonomy of a prototype system realizing this approach will be fully examined followingly.
+A huge amount of semantic web formatted data has been published on the internet, but yet to be exploited and utilized. By identifying a discrepancy between existing web search engines and the human cognitive process, we propose a novel information retrieval and visualization approach to cater to what the human brain expected from the search result, with the aid of the newly available semantic linked data and ontologies. This approach explores the concept of classes or categories for a given data instance, to target the attributes of the instance that the user is most interested, which in turn may potentially result in higher recall and precision of the search result. The autonomy of a prototype system realizing this approach will be fully examined followingly.
 
 
 
@@ -95,25 +102,25 @@ A huge amount of semantic web formatted data has been published on the internet,
 
 While the internet has successfully connected a huge amount of unstructured data in a human-orientated fashion, and hence produced structured data in a magnitude we have never seen before, ironically these structured data has been stored in completely separate silos. Numerous methods have been proposed to tear down the silo, both internally and externally, from the perspective of information enterprises. Tools such as middlewares and APIs are build upon existing data to address the issue.
 
-Moreover, with more relevant data generating exponentially every day, the state-of-the-art database design model - relational model - has been proven lacking the desired flexibility to adopt new information in many cases. In healthcare for instance, if the schema for patient records is predetermined, it will not be able to record the results for some tests that are invented after the database has been implemented. Entity–attribute–value model can be implemented on top of relational data schema for the extra dynamics, but this approach sacrifices the original functionalities that relational databases provide.
+Moreover, with more data generating exponentially every day, the state-of-the-art database design model - relational model - has been proven lacking the desired flexibility to integrate new information in many cases. In healthcare for instance, if the schema for patient records is predetermined, it will not be able to record the results for some tests that are invented after the database has been implemented. Entity–attribute–value model can be implemented on top of relational data schema for the extra dynamics, but this approach sacrifices the original functionalities that the relational databases provide.
 
-Rooted from the concept of semantic network, which is one of the knowledge representations in the domain of artificial intelligence, Semantic web solves the above difficulties by taking a fundamental paradigm shift about how the data should be organized.
+Rooted from the concept of semantic network, which is one of the knowledge representations in the domain of artificial intelligence, semantic web solves the above difficulties by taking a fundamental paradigm shift about how the data should be organized.
 
-Comparable to Entity–attribute–value model, semantic web stores data in a triplestore, where data entities are arranged as triples, which take the form of subject-predicate-object. However, semantic web data store is built for the purpose of linking data together. The subject, object, and even the predicate is not necessarily defined in the local data set. They can be defined elsewhere in the internet, identified by a unique URI. This is the essence why it is called semantic web: Semantics is expressed by linkages between concepts.
+Comparable to Entity–attribute–value model, semantic web stores data in a triplestore, where data entities are arranged as triples. Triples are short sentences with the form of subject-predicate-object. However, semantic web data store is set up for the purpose of linking data together. The subject, object, and even the predicate is not necessarily defined in the local data set. They can be defined elsewhere in the internet, identified by a unique URI. This is the essence why it is called semantic web: Semantics is expressed by linkages between concepts.
 
 Plus, in contrast to Entity–attribute–value model, where the attribute is defined as relational tables, in triplestore not only the object, but the predicate in a triple can be the subject of other triples as well, which greatly enhanced the expressiveness of such a data model.
 
-Because predicates can be described elsewhere as subjects, they can form superclass/subclass relationships; they can have constraints such as the set of elements the predicate can attribute to, and the set of elements the predicate can attribute with; and they can be used to define classification rules.
+Because predicates can be described elsewhere as subjects, they can form generalization / specialization relationships; they can have constraints such as defining the set of elements the predicate can attribute to, and the set of elements the predicate can attribute with; and they can be used as classification rules.
 
-Triplestore can contain triples representing any particular data entities or instances, and they need not to belong to any class at any time during their life-cycles. Yet at times they may be tied to more than one classes. Hence the properties an instance can possess will not be confined by its classification. This characteristic helps prevent information loss during modelling of the instances.
+Triplestore may contain triples representing any particular data entities or instances, and they need not to belong to any class at any time during their life-cycles. Yet at times they may be tied to more than one classes. So the properties an instance can possess will not be confined by its classification. This characteristic helps prevent information loss during modelling of the instances.
 
-Classes can be defined by having predicates as their properties, so that any data instances sharing those predicates can be catalogued into the corresponding classes. For instance, if there is a triple "Kate hasChild Mary", and a class Parent is defined as "Parent hasPredicate hasChild", then it implies Kate can be classified as Parent.
+Classes can be denoted by predicates, so that any data instances sharing those predicates can be catalogued into the corresponding classes. For instance, if there is a triple "Kate hasChild Mary", and the class Parent is defined as "Parent hasPredicate hasChild", then it implies that Kate should be classified as Parent.
 
 Such classification can be assigned manually, or more conveniently, by an automatic inference engine. By adopting the form of subject-predicate-object, triples can act as inference rules in the traditional artificial intelligence sense. Since predicates can themselves form a hierarchical relationship, superclass/subclass relationship can therefore be inferred also. For instance if the predicate "hasChild" is a specialization of the predicate "hasOffspring", and a class called Organism is defined as instances having the predicate "hasOffspring", then by inference Kate can be classified as Organism too.
 
 The inferred superclass/subclass hierarchy, or so called ontology, has the inherent strictly defined predicate generalization/specialization relationship. Parsons and Wand (2003) coined the term Property Precedence for this relationship and further developed a precedence algebra to categorize a whole range of different cases that the semantic meaning of data can be derived from such a relationship.
 
-Equipped with such expressibility, semantic web triplestore can mirror the reality more naturally. It is capable to cope with ever-changing information. Furthermore, data reconciliation from heterogeneous sources can be easily achieved by identifying predicate generalization/specialization relationship from different sources.
+Equipped with this expressibility, semantic web triplestore can mirror the reality more naturally. It is capable to cope with ever-changing information. Furthermore, data reconciliation from heterogeneous sources can be easily achieved by identifying predicate generalization/specialization relationships from different sources.
 
 \section{Motivation}
 
@@ -126,11 +133,11 @@ With all the above mentioned advantages over conventional databases, people arou
 \label{open data chart}
 \end{figure}
 
-For the first time we have been presented with a huge and interconnected data source with which anybody who has an internet connection can query freely. Nevertheless until today there have not emerged any killer application that can promote the concept of semantic web to a more broad audience. The usage of those data sources is rather limited for either academia or highly specialized application such as some bioinformatics query utilities.
+For the first time we have been presented with a huge and interconnected data source with which anybody who has an internet connection can query freely. Nevertheless until today there have not emerged any killer application that can promote the concept of semantic web to a more broad audience. The usage of those data sources is rather limited to either academia sphere or highly specialized application such as some bioinformatics query utilities.
 
-Since semantic web is a more reasonable way to organize information, it should further facilitate information retrieval for our daily use. Tim Berners-Lee (2001) described an automatic personal agent that has the ability to retrieve data with the precision and recall as a human being. This agent is no near to be found until today, but using semantic linked data to optimize precision and recall of search result is an attainable goal.
+Since semantic web is a more reasonable way to organize information, it should further facilitate information retrieval for our daily use. Tim Berners-Lee (2001) described an automatic personal agent who has the ability to retrieve data with the precision and recall as a human being. This agent is no near to be found until now, but using semantic linked data to optimize precision and recall of search result is an attainable goal.
 
-Existing web search is keywords oriented. The search engine can skim through its indexed database for documents containing user provided keywords, or its synonyms. While according to Andrei Broder (2002), web queries can be categorized into three major classes: Informational, Navigational, and Transactional. Keyword search may not satisfy the different purposed queries with same or similar keywords.
+Existing web search methodology is keywords oriented. The search engine can skim through its indexed database for documents containing user provided keywords, or their synonyms. While according to Andrei Broder (2002), web queries can be categorized into three major classes: Informational, Navigational, and Transactional. Different users may provide exact same keywords with completely distinctive purposes for the search.
 
 Semantic search, on the other hand, may provide a better alternative because it integrated a more dynamic relationship structure of concepts, or ontologies.
 
@@ -138,13 +145,13 @@ Originally, ontology is a branch of philosophical study about the basic categori
 
 It is intriguing that people begin to see this term more and more in the context of information system modelling rather than philosophy. Whether it is UML or Enhanced Entity Relationship Model, software engineers are pondering the inherent relationship between concepts in the focused domain.
 
-The advent of semantic web made ontology even more relevant, as concepts in any data sources become openly accessible, so that different parties might impose different interpretations on those concepts, and its relationship with other concepts.
+The advent of semantic web made ontology even more relevant, as concepts in any data sources become openly accessible, so that different parties might impose varied interpretations on those concepts, and its relationship with other concepts.
 
 This becomes the purpose of the project, which is to show that the key feature of semantic web is that entities can be associated with a range of context. The prototype search engine will utilize semantic linked data to display different facets for the same topic. User could later browse to any particular facet by following the links between data entities.
 
-Interestingly, this faceted approach of representing information is what our brains do during the cognitive process of thinking. When we need to refer to any particular thing, we generally speak of it in terms of the class to which it belongs. But we assign this classification upon the item being referred according to the problem we want to solve at hand. For example, under various circumstances, we might refer to Leonardo da Vinci as the artist, as the Italian or Tuscan painter, as the Renaissance artist, or even as the Italian vegetarian, or the person who was prosecuted under anti-homosexuality laws. When we refer to him by those classes, we are implying the relevant characteristics that Leonardo da Vinci had that share with other instances within the same class.
+Interestingly, this faceted approach of representing information is what our brains do during the cognitive process of thinking. When we need to refer to any particular thing, we generally speak of it in terms of the class to which it belongs. But we assign this classification upon the item being referred to according to the problem we want to solve at hand. For example, under various circumstances, we might refer to Leonardo da Vinci as the artist, as the Italian or Tuscan painter, as the Renaissance artist, or even as the Italian vegetarian, or the person who was prosecuted under anti-homosexuality laws. When we refer to him by those classes, we are implying the relevant characteristics that Leonardo da Vinci had that share with other instances within the same class.
 
-With available semantic linked data sources, we propose a novel semantic search approach to deliver a faceted information visualization upon a given fact, and a prototype software will be developed as a initial show case.
+With available semantic linked data sources, we propose a novel semantic search approach to deliver a faceted information visualization upon a given fact. A prototype system will be developed as an initial show case.
 
 \section{Related Work}
 
@@ -152,7 +159,7 @@ Some existing applications, such as Google knowledge search or Facebook graph se
 
 Facebook use an internal data store with API for external accessing. Google acquired Freebase as the basis for the knowledge search, which provides semantic search and RDF functionalities. It is built by importing various semantic data sources. But it does not maintain a well structured class hierarchy, or ontology, above its instance layer.
 
-Till today, the class dimension of semantic linked data is largely untouched by applications. This is not caused by the lack of ontology information available on the internet. DBpedia, the semantic data store mirror for Wikipedia, maintained a shallow, cross-domain ontology. It has been manually created and currently covers 359 classes which form a subsumption hierarchy and are described by 1,775 different properties (Christopher Sahnwaldt, 2012). Some other well populated ontologies are YAGO and UMBEL (Upper Mapping and Binding Exchange Layer), both containing more than thousands of class definitions. Our prototype system will query all the above mentioned ontologies to enrich the query result.
+Till today, the class dimension of semantic linked data is largely untouched by applications. This is not caused by the lack of ontology information available on the internet. DBpedia, the semantic data store mirror of Wikipedia, maintained a shallow, cross-domain ontology. It has been manually created and currently covers 359 classes which form a subsumption hierarchy and are described by 1,775 different properties (Christopher Sahnwaldt, 2012). Some other well populated ontologies are YAGO and UMBEL (Upper Mapping and Binding Exchange Layer), both of which contain more than thousands of class definitions. Our prototype system will query all the above mentioned ontologies to enrich the query result.
 
 \chapter{Task Performed}
 
@@ -166,15 +173,15 @@ SPARQL is a query language for RDF data stores. Currently there are more than 20
 
 \section{Rapid prototyping}
 
-We expect the end-user to provide keywords for the search. Keywords are not excellent to pinpoint one exact concept. Therefore the prototype will consist two major functionalities: Keywords disambiguation to let user determine one concept to be visualized, and concept visualization to display the relationship the chosen concept has with different classification schemas. 
+We expect the end-user to provide keywords for the search. Keywords are not excellent to pinpoint one exact concept. Therefore the prototype will consist two major functionalities: The keywords disambiguation to let user determine one concept to be visualized, and the concept visualization to display the relationship that the chosen concept has with different classification schemas. 
 
 \subsection{Disambiguation module}
 
-We began with developing the disambiguation module first, starting as a command-line script with the first argument as input. We used a Python package SPARQLWrapper, which helps establish connections with a given SPARQL endpoint, send SPARQL query strings, and receive and convert the result to a specified format. Regular express module is used to build the query string so that the first letter of the given words will be case insensitive.
+We began with developing the disambiguation module first, starting as a command-line script with the first argument as input. We used a Python package SPARQLWrapper, which helps establish connections with a given SPARQL endpoint, send SPARQL query strings, receive and convert the result to a specified format. Regular express module is used to build the query string so that the first letter of the given words will be case insensitive.
 
-At the beginning we used a SELECT query. If an entity has attributes associated with multiple values, the result table will contain duplicate attributes names. Later we found out this will result in more code for book keeping during iterating through multiple valued attributes. Then we switch to CONSTRUCT query, where the query result is a RDF graph, that can be represented in XML or JSON format.
+At the beginning we used a SELECT query. If an entity has attributes associated with multiple values, the result table will contain duplicate attributes names. Later we found out this will result in more code for bookkeeping during the iterating through multiple valued attributes. Then we switched to CONSTRUCT query, where the query result is an RDF graph, which can be represented in XML or JSON format.
 
-With this result, we imported the rdflib package for RDF manipulation. With a given RDF graph, it helps pick out the subject, predicate, or object if one of them is given as the confinement. Besides, it provides a wrapper class RDF resource, which can group all the RDF triple with the same URI together as an object, making message passing easier.
+With this result, we imported the rdflib package for RDF manipulation. With a given RDF graph, it helps pick out the subject, predicate, or object. Besides, it provides a wrapper class named RDF resource, which can group all the RDF triples with the same URI together as an object, making message passing easier.
 
 After querying DBpedia, topics sharing the user provided keywords in their titles are picked out from the result graph, wrapped as rdf resource, and packed in a list. The list is returned to the caller and displayed to the console. User then will tell the console which topic he or she is interested in further investigating.
 
@@ -184,31 +191,28 @@ After querying DBpedia, topics sharing the user provided keywords in their title
 
 After the user choose the topic, the RDF resource object of the topic will be passed to the visualization module. The networkx package will be invoked to store the topic and its ontology classifications as nodes. DBpedia triple store use the predicate \url{http://www.w3.org/1999/02/22-rdf-syntax-ns#type} to denote the class-instance relationship. We will query the URI of the class, to further obtain information about:
 
-\begin{center}
-~\\
-\end{center}
 \begin{itemize}
 \item Some other typical instances this class contains
 \item Superclass/subclass of this class
 \end{itemize}
 
-The information will be used to construct the information graph around the user specified entity. There will be a directed link from instances to the class they belong to, and from subclasses to superclasses. For example in the graph the class of scientific fiction movie will be linked to the class movie.
+The information will be used to construct the information graph around the user specified entity. There will be a directed link from instances to the class to which they belong, and from subclasses to superclasses. For example in the graph the class of scientific fiction movie will be linked to the class movie.
 
-Because in the topic resource object, we already have the class URIs as the objects in the triples with RDF:type predicate, so instead of using SPARQL for querying, we can directly obtain a RDF graph from the URI. Again rdflib has a parsing function to read in a RDF graph with the given URI, and later we wrap the graph into a rdflib resource object.
+In the topic resource object, we already have the class URIs. They are the objects in the triples with RDF:type predicate. Instead of using SPARQL for querying, conveniently we can directly obtain an RDF graph from the URI. Rdflib has a parsing function to read in an RDF graph with the given URI. Later we wrap the graph into an rdflib resource object.
 
-While querying the URI of the classes of the entity, we encountered another issue. Some ontology websites do not provide RDF triples with the URI link, but only a html formatted webpage. They might store the RDF formatted page at another place but for the moment we excluded querying those websites. We use regular expression to find URIs that contain "schema.org" or "opengis.net" for this reason.
+While querying the URI of the classes of the entity, we encountered another issue. Some ontology websites do not provide RDF triples with the URI link, but only an html formatted webpage. They might store the RDF formatted page at another place but for the moment we excluded querying those websites. We use regular expression to find URIs that contain "schema.org" or "opengis.net" for this reason.
 
 At the early version of the visualization module we queried the URI of classes in a serial fashion. Several test runs revealed that if the connection to the URI was broken or lost, the parsing function of rdflib cannot terminate properly, and it does not have any time-out mechanism, which lead to the freeze of the program. One direct and probably only viable solution was to fork the URI parsing into a separate thread and use the main thread to time it out when needed. Consequently a subclass of Python's threading.Thread class was set up to realize the functionalities of querying and returning the result as either RDF graph or rdflib resource object.
 
-Even with such configuration, querying class URIs was still taking a considerable amount of time, with an average of 2-3 seconds per URI and 6 class URIs per entity. This was especially unbearable after we moved the running environment from console to browser, where there was no real time feedback of what the script was doing. Afterwards we recognized that all the class URI querying can be perfectly parallelized, as we already had the thread class to spawn multiple threads. Now we use a Python built-in data structure Set to serve as the thread pool, and give all the threads 7 seconds for the parsing. The time limit is quite relax to ensure most of the fetching will success.
+Even with such configuration, querying class URIs was still taking a considerable amount of time, with an average of 2-3 seconds per URI and 6 class URIs per entity. This was especially unbearable after we moved the running environment from terminal to browser, where there was no real time feedback of what the script was doing. Afterwards we recognized that all the class URI querying can be perfectly parallelized, as we already had the thread class to spawn multiple threads. Now we use a Python built-in data structure Set to serve as the thread pool, and give all the threads 7 seconds for the parsing. The time limit is quite relax to ensure most of the fetching will success.
 
 After the class related RDF is queried back, we can build the directed graph with the newly obtained triples to find relationships between classes, as well as some other typical instances that this class contains.
 
-The networkx graph is returned to the caller. For the console version the output was firstly as a list of nodes and a list of links, and later we imported the package numpy and matplotlib for directed graph plotting. The limitation of styling provided by matplotlib and some other alternatives was one of the reasons we migrated the platform into browser based. For the browser to process the directed graph data, we dumped it into JSON format, which will be read by the JavaScript rendering functions.
+The networkx graph is returned to the caller. For the console version the output was firstly displayed as a list of nodes and a list of links, and later we imported the package numpy and matplotlib for directed graph plotting. The limitation of styling provided by matplotlib and some other alternatives was one of the reasons we migrated the platform into browser based. For the browser to process the directed graph data, we dumped it into JSON format, which will be read by the JavaScript rendering functions.
 
 \subsection{CGI server}
 
-Some other reasons for us to choose a browser based application include simpler distribution and friendlier user experience. Python has several built-in packages for setting up http server, let alone third party support of running python script on various robust server applications. For the sake of demonstrating this prototype system, we chose one of the simplest form of the server, a Python built-in HTTPServer with a CGIHTTPRequestHandler. This request handler can run any script in the cgi-bin directory upon http request. Python also has a cgi module to pass http GET or POST parameters into the script.
+Some other reasons for us to choose a browser based application include simpler distribution and friendlier user experience and user interaction. Python has several built-in packages for setting up http server, let alone third party support of running python script on various robust server applications. For the sake of demonstrating this prototype system, we chose one of the simplest forms of the server, a Python built-in HTTPServer with a CGIHTTPRequestHandler. This request handler can run any script in the cgi-bin directory upon http request. Python also has a cgi module to pass http GET or POST parameters into the script.
 
 To output HTML pages instead of printing results in the console, we refactored the code to make it more Model-View-Controller oriented. This lead us to use pickle for passing the list of rdflib resource objects between the two view generating scripts.
 
@@ -226,25 +230,11 @@ For all the above mentioned tasks, we extensively referred to the documentations
 
 \section{Git}
 
-Using Git is like a breeze. Although as a first-timer, we felt that life without revision control can hardly be imagined. During the development, we created three code branches. Branch Beta was where we put any code for major additional functionalities that we were not certain if it will work or not. There were lots of rollbacks happened on this branch to try out different coding approaches. If the functionality was accomplished, after tests it was merged into the branch Dev. This branch was the working branch for most of the code modification. Once a major module was developed we merge Dev into branch Master. 
+Using Git is like a breeze. Although as a first-timer, we felt that life without revision control can hardly be imagined. During the development, we created three code branches. Branch Beta was where we put any code for major additional functionalities that we were not certain if it will work or not. There were lots of rollbacks happened on this branch to try out different coding approaches. If the functionality was accomplished, after tests it was merged into the branch Dev. This branch was the working branch for most of the code modification. Once a major module was developed we merged Dev into branch Master. 
 
-Theoretically we planned that the commit points in the three branches will reflect different importance and robustness of the code modification. While towards the end of the develop cycle we failed to stick to the plan due to schedule pressure, where the code modification was more haphazard and unplanned. Controlling proper granularity of commits is an improvement point for our next project.
+Theoretically we planned that the commit points in the three branches will reflect different importance and robustness of the code modification. While towards the end of the developing cycle we failed to stick to the plan due to schedule pressure, where the code modification was more haphazard and unplanned. This situations was deepened when at the final stage DBpedia rolled out an update for all its URIs. We underestimated the workload for the code modification as we worked on the master branch. Later we realized our modified code will not work so we used "gitk" to find a previous commit point and branched it out as the unplanned fourth branch. But needless to say without Git this situation will become a catastrophe which may devastate the entire project. Nonetheless, controlling proper granularity of commits is an improvement point for our next project.
 
-We used GitHub as a remote repository so that we can work on different machines or different operating systems. As requested we login to GitHub ssh using a public key:
-
-\seqsplit{ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAso6DhNVONMBjFrunw0BBPOvuNrl53fQrBHBAXvHgrWwdVzkHTbOyPCUbrb0EVPFn7qvQ7mRI4wSJm1Ldb+aKYWs/GzLi6HFAtR3WQrxSkUTKoApU21OZKpkEB0W1i7kFax/p8PhSAttyRtnZexNgqC9F80P/fqBeKe6hJD46bXwITrinEg1KJzlN+WtOqSKa9J+RcFg+rOshKmmA1GlmDUlfMuW/FEvk/kVxQI84TMq4n4K9dE9rD6r4b0vmEvdgvTTdUdKD7Ts0UUvBLr+yl7I5sbVsJc2nePaCMBnO7+3fbY+jYxxcfywZh0E4bdPyWY/mawR0e1TODxiE2hgiGw== fw1714@mun.ca}
-
-The result of login is as follow:
-
-\begin{verbatim}
-Fred@DDB157D47A /e/1fred/CT/src (master)
-\$ ssh -T git@github.com
-Enter passphrase for key '/c/Documents and Settings/Fred/.ssh/id\_rsa':
-Hi fredseadroid! You've successfully authenticated, but GitHub does not provide
-shell access.
-Fred@DDB157D47A /e/1fred/CT/src (master)
-\$
-\end{verbatim}
+We used GitHub as a remote repository so that we can work on different machines or different operating systems.
 
 Git played one of the most important roles in the developing of this project. It helped us managing our code with clear trace of modification and making progress monitoring much easier.
 
@@ -264,11 +254,11 @@ Furthermore, as a scripting language, Python running environment is very easy to
 
 \section{Regular expression}
 
-Throughout the codes of this project there are several places that regular expressions are used. When it comes to deal with text processing, it is often the only logical choice. We used it primarily for building the query string, and for parse the query result URIs.
+Throughout the codes of this project there are several places that regular expressions are used. When it comes to deal with text processing, it is often the only logical choice. We used it primarily for building the query string, and for parsing the query result URIs.
 
 An issue arose when we used regular expression conditions to directly query DBpedia. The response time of the data store dropped tremendously if such operations were applied to text intensive fields such as abstracts or comments. This impedes us from trying to query all the fields that contains the keywords. For this reason the current prototype system matches keywords to the title of the entities in DBpedia.
 
-One potential future usage of regular expression is to parse the user input for spell checking and suggestion, preventing code injection and so forth.
+One potential future usage of regular expression is to parse the user input for spell checking, search suggestion, and preventing code injection and so forth.
 
 \section{Multi-thread}
 
@@ -282,7 +272,7 @@ In future the Python script may add the functionality of querying into a local c
 
 Tcl/Tk is the perfect tool to work with existing code. After we finished developing the threading class, there was a major DBpedia maintenance lasted a whole day. At the beginning we could not figure out why the query always failed, so we wrote a small Tkinter tester based on our threading class to test if the threading class works. Later we found out that all the query to DBpedia failed while others did not, then we became aware of the maintenance after went to the website.
 
-We used a grid layout manager for the GUI. By using the lambda keyword an anonymous function was set up to pass necessary parameters to the function that will be invoked upon button click. We considered this approach is better than making the needed variables global accessible.
+We used a grid layout manager for the GUI. By using the lambda keyword an anonymous function was set up to pass necessary parameters to the function that will be invoked upon button click. We considered that this approach is better than making the needed variables global accessible.
 
 \section{Makefile}
 
@@ -338,7 +328,7 @@ After enter some keywords, a term disambiguating page will show:
 \label{Disambiguating page}
 \end{figure}
 
-Choosing one of the topic the system will visualize all the classifications it belongs to from different ontologies, such as DBpedia, Umbel, or Yago. There will also have some typical instances belong to the classes. And different types of nodes will have different colour:
+By choosing one of the topics, the system will visualize all the classifications it belongs to from different ontologies, such as DBpedia, Umbel, or Yago. There will be some typical instances belonging to the classes also. And different types of nodes will have different colours:
 
 \begin{figure}[H]
 \centering
@@ -349,11 +339,13 @@ Choosing one of the topic the system will visualize all the classifications it b
 
 Clicking on the nodes will redirect the user to the corresponding URL showed near the nodes.
 
-Showed at the top left corner, there is a button for the user to download the visualized graph as a Scalable Vector Graphics file. The SVG file contains exact the same graph as showed in the browser.
+At the top left corner, there is a button for the user to download the visualized graph as a Scalable Vector Graphics file. The SVG file contains exact the same graph as displayed in the browser.
 
 \section{URI testing tool}
 
-The testing tool is relatively easy to use. Run the python file "URItester.py" located in the folder cgi-bin, and the Tkinter enabled GUI will show. In the textfield enter the URI and submit. If the URI contains RDF triples at the bottom the tool will show how many triples are received from the URI.
+The testing tool is relatively easy to use. Run the python file "URItester.py" located in the folder cgi-bin, and the Tkinter enabled GUI will show. In the textfield enter the URI and submit. If the URI contains RDF triples, at the bottom the tool will count how many triples are received from the URI.
+
+Since it is located in the cgi-bin folder, it is accessible remotely. Now when did not show the link to this program from the index page however, so it can be visited by direct URL only.
 
 \begin{figure}[H]
 \centering
@@ -364,11 +356,13 @@ The testing tool is relatively easy to use. Run the python file "URItester.py" l
 
 \chapter{Summary}
 
-From this project we attained a deeper understanding about the research direction we will be working on in the near future. And we established that current semantic data stores and ontologies have not yet realize the importance of predicate generalization/specialization, which will be one of the potential research topics to work on next. 
+From this project we attained a deeper understanding about the research direction we will be working on in the near future. And we established that current semantic data stores and ontologies have not yet realize the importance of predicate generalization/specialization, which will be one of the potential research topics to work on next.
 
-More importantly, we gained exceedingly knowledge about the computational environment that will benefits not only our study or work, but also our lives profoundly.
+Considering that modern web search users are only interested in the first page of the search result, to optimize the existing search engines, we can imagine a search scenario as such: We deliver search result in different tabs, and each of these tabs concentrates only on one semantic aspect of the search term. With minor modification prototype system we developed can support this search scenario, which may be qualified for further study as well.
 
-As summarized in the previous chapters, we employed all manner of computational tools in this project. Some of them made the old work processes faster, others made some processes obsolete. They also changed the mindset of how to plan a software project forever.
+More importantly, we gained some most needed and hands-on knowledge about the computational environment and tools, which will benefits not only our study or work, but also our lives profoundly.
+
+As summarized in the previous chapters, we employed all manners of computational tools in this project. Some of them made the old work processes faster, others made some processes obsolete. They also changed the mindset of how to plan a software project forever.
 
 From now on we are equipped with tools that can help us leverage existing programs and systems, exploit modern parallel compute architecture, cooperate with other programmers around the globe, maintain the code repository with the greatest clearness, and distribute our work with little effort. The only shortcoming of this learning experience is that we should definitely learn them much earlier.
 
@@ -386,13 +380,30 @@ This paper categorized different behaviours for which end-users use search engin
 
 \item Parsons, Jeffrey, and Yair Wand. "Attribute-based semantic reconciliation of multiple data sources." Journal on Data Semantics I. Springer Berlin Heidelberg, 2003. 21-47.
 
-This paper defined in a theoretical situation how it is the properties of entities that determinate the classification of the entity, and how it is the relationship between properties that also defined the superclass/subclass hierarchy in ontologies. It is relevant to the motivation of this project, with a ranking of 7. 
+This paper defined in a theoretical situation how it is the properties of entities that determinate the classification of the entity, and how it is the relationship between properties that also designate the superclass/subclass hierarchy in ontologies. It is relevant to the motivation of this project, with a ranking of 7. 
 
 \item Parsons, Jeffrey, and Yair Wand. "Emancipating instances from the tyranny of classes in information modeling." ACM Transactions on Database Systems (TODS) 25.2 (2000): 228-268.
 
 This paper emphasized a very important characteristic of next generation database schema, where the existence of the instances should be independent on the class definitions. Now there are ontologiests who concentrate on research about classification inference with semantic linked data. It is very relevant to the project, with a ranking of 8.
 \end{itemize}
 
+\section{Connecting to GitHub using SSH keys}
+
+As requested we login to GitHub ssh using a public key:
+
+\seqsplit{ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAso6DhNVONMBjFrunw0BBPOvuNrl53fQrBHBAXvHgrWwdVzkHTbOyPCUbrb0EVPFn7qvQ7mRI4wSJm1Ldb+aKYWs/GzLi6HFAtR3WQrxSkUTKoApU21OZKpkEB0W1i7kFax/p8PhSAttyRtnZexNgqC9F80P/fqBeKe6hJD46bXwITrinEg1KJzlN+WtOqSKa9J+RcFg+rOshKmmA1GlmDUlfMuW/FEvk/kVxQI84TMq4n4K9dE9rD6r4b0vmEvdgvTTdUdKD7Ts0UUvBLr+yl7I5sbVsJc2nePaCMBnO7+3fbY+jYxxcfywZh0E4bdPyWY/mawR0e1TODxiE2hgiGw== fw1714@mun.ca}
+
+The result of login is as follow:
+
+\begin{verbatim}
+Fred@DDB157D47A /e/1fred/CT/src (master)
+\$ ssh -T git@github.com
+Enter passphrase for key '/c/Documents and Settings/Fred/.ssh/id\_rsa':
+Hi fredseadroid! You've successfully authenticated, but GitHub does not provide
+shell access.
+Fred@DDB157D47A /e/1fred/CT/src (master)
+\$
+\end{verbatim}
 
 %%\subsection{Footnotes}
 %%The following command is used for footnotes \textbackslash footnote\{text for the footnote\}.\footnote{text for the footnote}

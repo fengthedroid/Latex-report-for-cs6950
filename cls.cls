@@ -70,7 +70,7 @@
 
 \vskip 5em
 \normalfont\Large\bfseries\@title\\
-\vskip 0.5em
+\vskip 3.5em
 \normalfont\normalsize\thesisnote\\
 \vskip 0.5em
 
