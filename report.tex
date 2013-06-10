@@ -19,6 +19,10 @@
 \usepackage{listings}
 %read/write verbatim TeX code
 \usepackage{fancyvrb}
+%for breaking the ssh key
+\usepackage{seqsplit}
+%for figures
+\usepackage{float}
 
 \setlength{\parskip}{16pt plus 1pt minus 1pt}
 
@@ -115,7 +119,7 @@ Equipped with such expressibility, semantic web triplestore can mirror the reali
 
 With all the above mentioned advantages over conventional databases, people around the world began to publish their data in the semantic web triple format. They are also linked with each other so that a single query can traverse through the entire network of data sources.
 
-\begin{figure}[ht!]
+\begin{figure}[H]
 \centering
 \includegraphics[width=\textwidth]{figures/opendata.jpeg}
 \caption{Published open data}
@@ -178,7 +182,7 @@ After querying DBpedia, topics sharing the user provided keywords in their title
 
 \subsection{Visualization module}
 
-After the user choose the topic, the RDF resource object of the topic will be passed to the visualization module. The networkx package will be invoked to store the topic and its ontology classifications as nodes. DBpedia triple store use the predicate "http://www.w3.org/1999/02/22-rdf-syntax-ns\#type" to denote the class-instance relationship. We will query the URI of the class, to further obtain information about:
+After the user choose the topic, the RDF resource object of the topic will be passed to the visualization module. The networkx package will be invoked to store the topic and its ontology classifications as nodes. DBpedia triple store use the predicate \url{http://www.w3.org/1999/02/22-rdf-syntax-ns#type} to denote the class-instance relationship. We will query the URI of the class, to further obtain information about:
 
 \begin{center}
 ~\\
@@ -210,41 +214,185 @@ To output HTML pages instead of printing results in the console, we refactored t
 
 For the visualization of the graph data, which is stored in JSON format, we use a JavaScript library D3, which supports fully customizable graph representation. We developed a gravity enabled directed graph for better user interaction. Nodes are coloured differently for whether it is the original searched entity, the class to which it belongs, or other instances related to the classes. Labels of the nodes are designed to display their domain names for the purpose of demonstration, and can be adjusted for particular usage. Clicking the nodes will redirect the browser to the URI that the node bears.
 
-For all the above mentioned tasks, we extensively referred to the documentations of Python, the Python packages used in this prototype system, and the D3 library. 
+\subsection{Testing and installing}
+
+For the purpose of testing the threaded URI parsing module, we developed a separate Tkinter tool to count the number of triples for a given URI. By using this tool it is easy to find out whether a URI can response to RDF request and send RDF triples back.
+
+We also built a Makefile file to make distributing this prototype application easier.
+
+For all the above mentioned tasks, we extensively referred to the documentations of Python, the Python packages used in this prototype system, the D3 library, and the Tkinter library.
 
 \chapter{Key points and tools}
 
 \section{Git}
 
-Using Git is like a breeze. Although as a first-timer, life without Git can hardly be remembered.
+Using Git is like a breeze. Although as a first-timer, we felt that life without revision control can hardly be imagined. During the development, we created three code branches. Branch Beta was where we put any code for major additional functionalities that we were not certain if it will work or not. There were lots of rollbacks happened on this branch to try out different coding approaches. If the functionality was accomplished, after tests it was merged into the branch Dev. This branch was the working branch for most of the code modification. Once a major module was developed we merge Dev into branch Master. 
 
-gitignore
+Theoretically we planned that the commit points in the three branches will reflect different importance and robustness of the code modification. While towards the end of the develop cycle we failed to stick to the plan due to schedule pressure, where the code modification was more haphazard and unplanned. Controlling proper granularity of commits is an improvement point for our next project.
 
-ssh
+We used GitHub as a remote repository so that we can work on different machines or different operating systems. As requested we login to GitHub ssh using a public key:
+
+\seqsplit{ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAso6DhNVONMBjFrunw0BBPOvuNrl53fQrBHBAXvHgrWwdVzkHTbOyPCUbrb0EVPFn7qvQ7mRI4wSJm1Ldb+aKYWs/GzLi6HFAtR3WQrxSkUTKoApU21OZKpkEB0W1i7kFax/p8PhSAttyRtnZexNgqC9F80P/fqBeKe6hJD46bXwITrinEg1KJzlN+WtOqSKa9J+RcFg+rOshKmmA1GlmDUlfMuW/FEvk/kVxQI84TMq4n4K9dE9rD6r4b0vmEvdgvTTdUdKD7Ts0UUvBLr+yl7I5sbVsJc2nePaCMBnO7+3fbY+jYxxcfywZh0E4bdPyWY/mawR0e1TODxiE2hgiGw== fw1714@mun.ca}
+
+The result of login is as follow:
+
+\begin{verbatim}
+Fred@DDB157D47A /e/1fred/CT/src (master)
+\$ ssh -T git@github.com
+Enter passphrase for key '/c/Documents and Settings/Fred/.ssh/id\_rsa':
+Hi fredseadroid! You've successfully authenticated, but GitHub does not provide
+shell access.
+Fred@DDB157D47A /e/1fred/CT/src (master)
+\$
+\end{verbatim}
+
+Git played one of the most important roles in the developing of this project. It helped us managing our code with clear trace of modification and making progress monitoring much easier.
 
 \section{Python}
 
-\subsection{SPARQLWrapper}
+We adopted Python for the developing language of this project for the following reasons:
 
-\subsection{rdflib}
+\begin{itemize}
+\item High expressiveness-simplicity ratio
+\item Plenty of existing library for semantic web query
+\item Detailed online documentation support
+\end{itemize}
 
-\subsection{other packages}
+We imported a variety of libraries mentioned in the previous chapter, which freed us from reinventing the wheels again.
+
+Furthermore, as a scripting language, Python running environment is very easy to setup. We can immediately begin coding on almost any machine, without the worry of interpreter configuration. On some linux machines where we do not have superuser privileges to install Python packages, all we need to do is to put the package directories directly into our source code folder. And we can keep these folders out of git repository by using .gitignore file.
 
 \section{Regular expression}
 
+Throughout the codes of this project there are several places that regular expressions are used. When it comes to deal with text processing, it is often the only logical choice. We used it primarily for building the query string, and for parse the query result URIs.
+
+An issue arose when we used regular expression conditions to directly query DBpedia. The response time of the data store dropped tremendously if such operations were applied to text intensive fields such as abstracts or comments. This impedes us from trying to query all the fields that contains the keywords. For this reason the current prototype system matches keywords to the title of the entities in DBpedia.
+
+One potential future usage of regular expression is to parse the user input for spell checking and suggestion, preventing code injection and so forth.
+
 \section{Multi-thread}
 
-\chapter{How-to}
+Multi-thread architecture is a key performance booster for this project. Querying remote data store is risky and slow, but those are read only operations and thread safety is not an issue as they do not need shared memory.
+
+Python has built-in thread and process control classes and different implementation approaches. There are succinct approaches such as passing a target function to the predefined threadingable class. Under the consideration of keeping the code more decoupled, we chose a rather verbose but clear way to define a class inheriting from the built-in threading class.
+
+In future the Python script may add the functionality of querying into a local cache before that the user gives choice.
+
+\section{Tk and Tkinter}
+
+Tcl/Tk is the perfect tool to work with existing code. After we finished developing the threading class, there was a major DBpedia maintenance lasted a whole day. At the beginning we could not figure out why the query always failed, so we wrote a small Tkinter tester based on our threading class to test if the threading class works. Later we found out that all the query to DBpedia failed while others did not, then we became aware of the maintenance after went to the website.
+
+We used a grid layout manager for the GUI. By using the lambda keyword an anonymous function was set up to pass necessary parameters to the function that will be invoked upon button click. We considered this approach is better than making the needed variables global accessible.
+
+\section{Makefile}
+
+We wrote a Makefile text file to simplify the packaging, installation, cleaning, and running of this prototype system. After system administrators receive the package of this system, they can unpack it with the command "make" or "make install". "make exec" will start the web server on TCP port 8000, and "make exec PORT=\#" will start the web server on a given port number. "make tar" will tar the application back into a package for distribution. "make clean" will delete the package file.
+
+There are several variables at the beginning of the Makefile, where package name, python interpreter, default port number, default installation directory, and default tar program can be adjusted.
+
+Because Python is a scripting language, there is no compiler needed. But still Makefile ease the configuration of the system.
+
+\section{Bash}
+
+The majority of the developing tools of this project work in Bash. One very useful trick we did to monitor the running of the system is to use "tail -F" command to have the changes to the log file displayed on terminal in real time.
+
+\chapter{System Manual}
+
+\section{Installation}
+
+After receiving the .tar.gz package with the Makefile, put them in the same directory. At this directory run "make install" to extract the files into the installation directory, which is defaulted as "semsearch/".
+
+Run "make clean" to delete the package. If you ever need the package, run "make tar" to create one.
+
+\section{Starting the server}
+
+At the directory where the Makefile exists, run command "make exec" to start the server on port 8000, or "make exec PORT=\#" to start with the given port number. The following message will be shown on the terminal.
+
+\begin{verbatim}
+$ make exec
+cd semsearch/ && Python start.py 8000 && cd ..
+Starting simple_httpd on port: 8000
+\end{verbatim}
+
+\section{Searching process}
+
+Open the browser from any computers that can be connect to the running server. In the address bar put in the IP address of the server with the port number. A simple page will be shown as follow:
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{figures/page1.png}
+\caption{Index page}
+\label{Index page}
+\end{figure}
+
+\begin{center}
+~\\
+\end{center}
+
+After enter some keywords, a term disambiguating page will show:
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{figures/page2.png}
+\caption{Disambiguation page}
+\label{Disambiguating page}
+\end{figure}
+
+Choosing one of the topic the system will visualize all the classifications it belongs to from different ontologies, such as DBpedia, Umbel, or Yago. There will also have some typical instances belong to the classes. And different types of nodes will have different colour:
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{figures/page3.png}
+\caption{Visualization page}
+\label{Visualization page}
+\end{figure}
+
+Clicking on the nodes will redirect the user to the corresponding URL showed near the nodes.
+
+Showed at the top left corner, there is a button for the user to download the visualized graph as a Scalable Vector Graphics file. The SVG file contains exact the same graph as showed in the browser.
+
+\section{URI testing tool}
+
+The testing tool is relatively easy to use. Run the python file "URItester.py" located in the folder cgi-bin, and the Tkinter enabled GUI will show. In the textfield enter the URI and submit. If the URI contains RDF triples at the bottom the tool will show how many triples are received from the URI.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{figures/page4.png}
+\caption{URI checking tool}
+\label{URI checking tool}
+\end{figure}
 
 \chapter{Summary}
-\section{Lesson learned}
-\section{Future research}
 
-property precedence
+From this project we attained a deeper understanding about the research direction we will be working on in the near future. And we established that current semantic data stores and ontologies have not yet realize the importance of predicate generalization/specialization, which will be one of the potential research topics to work on next. 
+
+More importantly, we gained exceedingly knowledge about the computational environment that will benefits not only our study or work, but also our lives profoundly.
+
+As summarized in the previous chapters, we employed all manner of computational tools in this project. Some of them made the old work processes faster, others made some processes obsolete. They also changed the mindset of how to plan a software project forever.
+
+From now on we are equipped with tools that can help us leverage existing programs and systems, exploit modern parallel compute architecture, cooperate with other programmers around the globe, maintain the code repository with the greatest clearness, and distribute our work with little effort. The only shortcoming of this learning experience is that we should definitely learn them much earlier.
 
 \chapter{Appendix}
 \section{References}
-\section{A brief summary of the papers}
+
+\begin{itemize}
+\item Berners-Lee, Tim, James Hendler, and Ora Lassila. "The semantic web." Scientific american 284.5 (2001): 28-37.
+
+This paper introduced the framework for the future of Semantic Web. It described the basic element that the Semantic Web will have, and several application scenarios once such technology matures. It is very relevant to my research and this project, with a ranking of 8.
+
+\item Broder, Andrei. "A taxonomy of web search." ACM Sigir forum. Vol. 36. No. 2. ACM, 2002.
+
+This paper categorized different behaviours for which end-users use search engine. It exposed that the current mainstream search engine may not fully satisfy what the end-user expected. It is relevant with a ranking of 6.
+
+\item Parsons, Jeffrey, and Yair Wand. "Attribute-based semantic reconciliation of multiple data sources." Journal on Data Semantics I. Springer Berlin Heidelberg, 2003. 21-47.
+
+This paper defined in a theoretical situation how it is the properties of entities that determinate the classification of the entity, and how it is the relationship between properties that also defined the superclass/subclass hierarchy in ontologies. It is relevant to the motivation of this project, with a ranking of 7. 
+
+\item Parsons, Jeffrey, and Yair Wand. "Emancipating instances from the tyranny of classes in information modeling." ACM Transactions on Database Systems (TODS) 25.2 (2000): 228-268.
+
+This paper emphasized a very important characteristic of next generation database schema, where the existence of the instances should be independent on the class definitions. Now there are ontologiests who concentrate on research about classification inference with semantic linked data. It is very relevant to the project, with a ranking of 8.
+\end{itemize}
+
 
 %%\subsection{Footnotes}
 %%The following command is used for footnotes \textbackslash footnote\{text for the footnote\}.\footnote{text for the footnote}
